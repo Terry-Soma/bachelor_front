@@ -1,9 +1,14 @@
 
 
 
+
 import { Link } from 'react-router-dom';
 import css from './style.module.css';
 import logo from './../../assets/schoolicon.svg'
+import { BiMap } from 'react-icons/bi'
+import { BsPerson } from 'react-icons/bs'
+
+
 export default function SchoolPage() {
   const data =
     [
@@ -178,15 +183,11 @@ export default function SchoolPage() {
                       <div>{substrings}....</div>
                     </p>
                     <div className={css['card__data']}>
-                      <svg className={css['card__icon']}>
-                        <use xlinkHref={`${logo}#icon-map-pin`}></use>
-                      </svg>
+                      <BiMap color='#55c57a' />
                       <span>{add}</span>
                     </div>
                     <div className={css['card__data']}>
-                      <svg className={css['card__icon']}>
-                        <use xlinkHref={`${logo}#icon-user`}></use>
-                      </svg>
+                      <BsPerson color='#55c57a' st />
                       <span>1000 оюутан</span>
                     </div>
                   </div>
