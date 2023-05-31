@@ -1,0 +1,58 @@
+img {
+  object-fit: cover;
+}
+
+.bg-myNav {
+  background-color: #02338a;
+  color: #fff;
+  z-index: 1000;
+
+}
+
+.navlink {
+  text-transform: uppercase;
+  font-size: 16px !important;
+}
+
+.navbar a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.navbar {
+  margin-bottom: unset;
+}
+
+.mainbtn {
+  border-radius: 4px;
+  padding: 11px 22px !important;
+  justify-self: flex-end;
+  color: #fff;
+  outline: none;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  margin-inline: 24px;
+  align-items: center;
+}
+
+.mainbtn:hover {
+  transition: all 0.2s ease-in-out;
+  background: #1b74e4;
+  color: #010606;
+}
+
+@media (min-width: 576px) {
+  .navbar-expand-sm .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    margin-bottom: unset !important;
+  }
+
+  .navbar-expand-sm .navbar-nav:last-child {
+    flex-direction: row;
+    align-items: center;
+  }
+}
