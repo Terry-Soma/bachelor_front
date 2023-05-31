@@ -2,16 +2,16 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebook } from 'react-icons/fa';
 import { SiTwitter } from 'react-icons/si';
-import { FaInstagramSquare, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 import { BsLinkedin, BsGoogle } from 'react-icons/bs';
-
+import { FcGoogle } from 'react-icons/fc';
 import { BsFillEnvelopeFill } from 'react-icons/bs';
 
 import Logo from './../../assets/logowhite.png';
-
+import Insta from './../../assets/insta.png';
 export default function Footer() {
   return (
-    <footer className="my__footer  text-center text-lg-start text-muted pt-5">
+    <footer className="my__footer text-center text-lg-start text-muted pt-5">
 
       <section className='p-4 border-bottom'>
         <div className="container  text-white text-center text-md-start mt-5">
@@ -24,11 +24,11 @@ export default function Footer() {
                   alt="Их засаг лого"
                   height="50px"
                 />
-                <h6 className="text-uppercase  ms-3 fs-3">
+                <h6 className="text-uppercase mb-0 ms-4 fs-4">
                   ИХ ЗАСАГ
                 </h6>
               </span>
-              <p className='fs-4'>
+              <p>
                 Их Засаг ОУИС мэдлэгийг үйлдвэрлэгч, баялгийг бүтээгчдийг
                 төрүүлэх, оюутан суралцагчдын ажил амьдралын баталгааг
                 хангахад чиглэгдсэн сургалт, судалгаа, инновацийн бүтээлч
@@ -37,15 +37,15 @@ export default function Footer() {
             </div>
 
             <div className="col-md-2 col-lg-3 col-xl-2  mx-auto mb-4 mt-4">
-              <h6 className="text-uppercase  mb-lg-4 ms-4 fs-3">Цэс</h6>
+              <h6 className="text-uppercasemb-lg-4 ms-4 fs-4 mb-4">Цэс</h6>
               <ul>
                 <li>
-                  <Link to="/info" className="text-reset fs-4">
+                  <Link to="/info" className="text-reset">
                     Хөтөлбөрүүд
                   </Link>
                 </li>
                 <li>
-                  <Link to="/school" className="text-reset fs-4">
+                  <Link to="/school" className="text-reset">
                     Салбар сургууль
                   </Link>
                 </li>
@@ -84,8 +84,8 @@ export default function Footer() {
             </div>
 
             <div className="col-md-4 col-lg-3 col-xl-3  text-white  mx-auto mt-4 mb-4">
-              <h6 className="text-uppercase  mb-4 fs-3">Холбоо барих</h6>
-              <p className='mb-3 pt-2 '>
+              <h6 className="text-uppercase  mb-4 fs-5">Холбоо барих</h6>
+              <p className='mb-3 pt-4'>
                 <FaMapMarkerAlt />
                 <span> Монгол Улс Улаанбаатар хот.
                   Баянзүрх дүүрэг, 4 дүгээр хороо, Б.Доржийн гудамж, Их Засаг
@@ -105,22 +105,25 @@ export default function Footer() {
           </div>
         </div>
       </section>
-      <section className="d-flex justify-content-center gap-4 p-4 border-bottom">
-        <a href="https://www.facebook.com/ikhzasag" target="_blanks" className="me-4 text-reset">
-          <FaFacebook fontSize="2rem" />
-        </a>
-        <a href="https://twitter.com/IkhzasOfficial" target="_blanks" className="me-4 text-reset">
-          <SiTwitter fontSize="2rem" />
-        </a>
-        <a href="https://www.facebook.com/ikhzasag" target="_blanks" className="me-4 text-reset">
-          <BsGoogle fontSize="2rem" />
-        </a>
-        <a href="https://www.facebook.com/ikhzasag" target="_blanks" className="me-4 text-reset">
-          <FaInstagramSquare fontSize="2rem" />
-        </a>
-        <a href="https://www.facebook.com/ikhzasag" target="_blanks" className="me-4 text-reset">
-          <BsLinkedin fontSize="2rem" />
-        </a>
+      <section className="" style={{ background: "hsl(0, 5%, 92%)" }}>
+
+        <div className='d-flex justify-content-between align-items-center gap-4 p-4 border-bottom ' style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <a href="https://www.facebook.com/ikhzasag" target="_blanks" className="me-4 text-reset">
+            <FaFacebook fontSize="4rem" color='#1877F2' />
+          </a>
+          <a href="https://twitter.com/IkhzasOfficial" target="_blanks" className="me-4 text-reset">
+            <SiTwitter fontSize="4rem" color='#1DA1F2' />
+          </a>
+          <a href="https://www.facebook.com/ikhzasag" target="_blanks" className="me-4 text-reset">
+            <FcGoogle fontSize="4rem" />
+          </a>
+          <a href="https://www.facebook.com/ikhzasag" target="_blanks" className="me-4 text-reset">
+            <img src={Insta} alt="insta" />
+          </a>
+          <a href="https://www.facebook.com/ikhzasag" target="_blanks" className="me-4 text-reset">
+            <BsLinkedin fontSize="4rem" color='#0A66C2' />
+          </a>
+        </div>
       </section>
       <div
         className="text-center p-4 text-white "
@@ -129,7 +132,6 @@ export default function Footer() {
         &copy; {new Date().getFullYear()} :{' '}
         <a href="https://ikhzasag.edu.mn" className='text-white '>ИХ ЗАСАГ ОЛОН УЛСЫН ИХ СУРГУУЛЬ</a>
       </div>
-
     </footer>
   )
 }

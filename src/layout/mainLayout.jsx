@@ -8,7 +8,7 @@ export default function MainLayout(props) {
     <>
       <div className={css.headin}></div>
       <MainNavbar />
-      <main>
+      <main className="fs-4">
         {props.children}
       </main>
 
