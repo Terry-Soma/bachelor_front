@@ -206,10 +206,7 @@ section#school {
 
 .card__data svg {
   margin-right: 1rem;
-  height: 32px;
-  width: 32px;
-  fill: #55c57a;
-  /* flex: 1; */
+  flex: 1;
 }
 
 .card__data span {
@@ -322,8 +319,6 @@ section#school {
   .card-container {
     grid-template-columns: auto;
   }
-
-
 }
 
 @media screen and (max-width: 1200px) and (min-width: 992px) {

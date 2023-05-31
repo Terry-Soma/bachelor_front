@@ -4,7 +4,6 @@
 
 import { Link } from 'react-router-dom';
 import css from './style.module.css';
-import logo from './../../assets/schoolicon.svg'
 import { BiMap } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
 
@@ -183,11 +182,11 @@ export default function SchoolPage() {
                       <div>{substrings}....</div>
                     </p>
                     <div className={css['card__data']}>
-                      <BiMap color='#55c57a' />
+                      <BiMap color='#55c57a' style={{ height: "32px", width: "32px" }} />
                       <span>{add}</span>
                     </div>
                     <div className={css['card__data']}>
-                      <BsPerson color='#55c57a' st />
+                      <BsPerson color='#55c57a' style={{ height: "32px", width: "32px" }} />
                       <span>1000 оюутан</span>
                     </div>
                   </div>
