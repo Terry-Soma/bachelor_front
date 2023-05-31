@@ -1,5 +1,4 @@
-import { Route, Router, Routes } from "react-router-dom"
-import App from "../App"
+import { Route, Routes } from "react-router-dom"
 import MainLayout from "../layout/mainLayout"
 import HelpPage from "../pages/Help"
 import HomePage from "../pages/home"
@@ -15,10 +14,7 @@ export default function Root() {
         <Route path='/hutulbur' element={<HutulburPage />} />
         <Route path='/help' element={<HelpPage />} />
         <Route path="/login" element={<LoginPage />} />
-
         <Route path='/' element={<HomePage />} />
-
-
       </Routes>
     </MainLayout>
   )
