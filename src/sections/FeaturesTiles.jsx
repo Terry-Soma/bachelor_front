@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import { SectionTilesProps } from './SectionProps';
 import SectionHeader from './SectionHeader';
-import './style.css';
 import feature1 from './../assets/feature-tile-icon-01.svg'
 import { IoIosHelp } from 'react-icons/io'
 import feature2 from './../assets/feature-tile-icon-02.svg'

@@ -79,109 +79,16 @@ nav .btn {
   background-color: #0fa6e2;
 }
 
-.Drm {
-  font-size: 3rem;
-  color: white;
-  font-weight: bold;
-}
-
-.Padder {
-  padding: 2%;
-  text-justify: auto;
-}
-
-.PadTop {
-  padding-top: 2%;
-}
-
-.this:link,
-.this:visited {
-  background-color: #f44336;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.this:hover,
-.this:active {
-  background-color: red;
-}
-
-/*///////////////////////////////////////*/
-
-.Info_Buto {
-  height: 20rem;
-  width: 50%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
-  background-color: #00bdf7;
-  border: hidden;
-}
-
-.Info_Buto:hover {
-  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-  transform: translateY(-0.25em);
-  border: solid 5px #000000;
-}
-
-.uio {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.imege {
-  border: 1px solid black;
-  margin: 3rem;
-}
-
-.Puk {
-  background-color: #3eb4c4;
-}
-
-/* BUTTOOOOOOOOOOOOOON */
-
-.raise:hover {
-  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-  transform: translateY(-0.25em);
-  color: white;
-  transition-duration: 1s;
-}
-
-.raise:focus {
-  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-  transform: translateY(-0.25em);
-  color: white;
-  border-bottom: 1.5px solid rgb(26, 1, 255);
-}
-
-.raise {
-  border: hidden;
-  list-style: none;
-  margin-left: 1.5rem;
-  text-decoration: none;
-  color: #a5faf6;
-  font-weight: bold;
-}
-
 .sticky {
   position: fixed;
   top: 0;
   width: 100%;
 }
 
-/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
 .sticky+.content {
   padding-top: 102px;
 }
 
-.content {
-  padding: 16px;
-}
-
-/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .Card {
     width: 15rem;
@@ -190,23 +97,6 @@ nav .btn {
   .Card .buton {
     margin: auto;
     font-size: 9px;
-  }
-
-  .Layou {
-    font-size: 9px;
-  }
-
-  .Sch {
-    height: 300px;
-  }
-
-  .Hedo {
-    font-size: 2rem;
-  }
-
-  .Hovery {
-    width: 5rem;
-    height: 5rem;
   }
 }
 
@@ -229,14 +119,6 @@ nav .btn {
     height: 325px;
   }
 
-  .Hedo {
-    font-size: 2.5rem;
-  }
-
-  .Hovery {
-    width: 6rem;
-    height: 6rem;
-  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -248,23 +130,6 @@ nav .btn {
   .Card .buton {
     margin: auto;
     font-size: 13px;
-  }
-
-  .Layou {
-    font-size: 13px;
-  }
-
-  .Sch {
-    height: 350px;
-  }
-
-  .Hedo {
-    font-size: 3rem;
-  }
-
-  .Hovery {
-    width: 7rem;
-    height: 7rem;
   }
 }
 
@@ -279,22 +144,6 @@ nav .btn {
     font-size: 15px;
   }
 
-  .Layou {
-    font-size: 15px;
-  }
-
-  .Sch {
-    height: 375px;
-  }
-
-  .Hedo {
-    font-size: 3.5rem;
-  }
-
-  .Hovery {
-    width: 9rem;
-    height: 9rem;
-  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -306,23 +155,6 @@ nav .btn {
   .Card .buton {
     margin: auto;
     font-size: 17px;
-  }
-
-  .Layou {
-    font-size: 17px;
-  }
-
-  .Sch {
-    height: 400px;
-  }
-
-  .Hedo {
-    font-size: 4rem;
-  }
-
-  .Hovery {
-    width: 10rem;
-    height: 10rem;
   }
 }
 
@@ -351,61 +183,6 @@ nav .btn {
 
 /* /////////////////// Info2 ////////////////////////// */
 
-.Whole {
-  padding-left: 3rem;
-  padding-right: 3rem;
-
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.Piku {
-  width: 100%;
-  height: 400px;
-  background-color: transparent;
-}
-
-.Hovv {
-  padding-top: 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.Hovery {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.Hovery button {
-  /* margin-left: 5rem;
-  margin-right: 5rem; */
-  border: none;
-  font-weight: bold;
-  font-size: larger;
-  background: transparent;
-}
-
-.Hovery:hover {
-  transform: scale(1.1);
-  color: #00bdf7;
-  transition-duration: 0.5s;
-}
-
-.Hedo {
-  height: auto;
-  width: auto;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
-  text-align: center;
-}
-
-.Hedo:hover {
-  color: #00bdf7;
-  transition-duration: 0.5s;
-}
 
 .Butty {
   width: 20%;
@@ -719,8 +496,7 @@ hr {
   display: block;
   height: 1px;
   background: #25282c;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .invert-color {
@@ -2111,55 +1887,6 @@ textarea.form-input {
   padding-top: 12px;
 }
 
-.footer-blocks {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -24px;
-  margin-left: -24px;
-  margin-top: -12px;
-}
-
-.footer-blocks:last-of-type {
-  margin-bottom: 28px;
-}
-
-.footer-blocks:not(:last-of-type) {
-  margin-bottom: 12px;
-}
-
-.footer-block {
-  flex-grow: 1;
-  flex-basis: 160px;
-  box-sizing: content-box;
-  padding: 12px 24px;
-}
-
-/* .footer-block * {
-  box-sizing: border-box;
-} */
-
-.footer-block ul li:not(:last-child) {
-  margin-bottom: 4px;
-}
-
-.footer-block a {
-  color: #9ca9b3;
-}
-
-.footer-block a:active,
-.footer-block a:hover {
-  color: #eceded;
-}
-
-.footer-block-title {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 700;
-  color: #eceded;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
 .invert-color .footer-block-title {
   color: #151719;
 }
@@ -2448,7 +2175,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .features-tiles-item-image {

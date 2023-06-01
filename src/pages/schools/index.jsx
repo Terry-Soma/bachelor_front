@@ -145,75 +145,73 @@ export default function SchoolPage() {
             console.log(add)
             let res = e.color.substring(0, 5);
             return (
-              <>
-                <div className={css.card} key={e.Id}>
-                  <div className={css['card__header']}>
-                    <div className={css['card__picture']}>
-                      <div
-                        className={css['card__picture-overlay']}
-                        style={{
-                          backgroundImage: `linear-gradient(to right bottom, ${e.color
-                            }, ${res + '33'})`,
-                        }}
-                      >
-                        &nbsp;
-                      </div>
-                      <img
-                        src={`https://elselt.ikhzasag.edu.mn/uploads/${e.img}`}
-                        alt={e.name}
-                        className={css['card__picture-img']}
-                      />
-                    </div>
-
-                    <h3 className={css['heading-tertirary']}>
-                      <span
-                        style={{
-                          backgroundImage: `linear-gradient(to right bottom, ${e.color
-                            }, ${res + '52'})`,
-                        }}
-                      >
-                        {e.name}
-                      </span>
-                    </h3>
-                  </div>
-
-                  <div className={css['card__details']}>
-                    <p className={css['card__text']}>
-                      <div>{substrings}....</div>
-                    </p>
-                    <div className={css['card__data']}>
-                      <BiMap color='#55c57a' style={{ height: "32px", width: "32px" }} />
-                      <span>{add}</span>
-                    </div>
-                    <div className={css['card__data']}>
-                      <BsPerson color='#55c57a' style={{ height: "32px", width: "32px" }} />
-                      <span>1000 оюутан</span>
-                    </div>
-                  </div>
-                  <div className={css['card__footer']}>
-                    <a
-                      className={`${css['btn']} ${css['btn--green']} ${css['btn--small']} `}
-                      style={{ background: e.color }}
-                      href="https://ikhzasag.edu.mn/"
-                      target="_blank"
-                    >
-                      Дэлгэрэнгүй
-                    </a>
-                    <Link
-                      to={{
-                        pathname: '/info',
-                        state: e.name,
-                      }}
-                      className={`${css['btn']} ${css['btn--green']} ${css['btn--small']}`}
+              <div className={css.card} key={e.Id}>
+                <div className={css['card__header']}>
+                  <div className={css['card__picture']}>
+                    <div
+                      className={css['card__picture-overlay']}
                       style={{
-                        backgroundColor: e.color,
+                        backgroundImage: `linear-gradient(to right bottom, ${e.color
+                          }, ${res + '33'})`,
                       }}
                     >
-                      Хөтөлбөрүүд
-                    </Link>
+                      &nbsp;
+                    </div>
+                    <img
+                      src={`https://elselt.ikhzasag.edu.mn/uploads/${e.img}`}
+                      alt={e.name}
+                      className={css['card__picture-img']}
+                    />
+                  </div>
+
+                  <h3 className={css['heading-tertirary']}>
+                    <span
+                      style={{
+                        backgroundImage: `linear-gradient(to right bottom, ${e.color
+                          }, ${res + '52'})`,
+                      }}
+                    >
+                      {e.name}
+                    </span>
+                  </h3>
+                </div>
+
+                <div className={css['card__details']}>
+                  <p className={css['card__text']}>
+                    {substrings}
+                  </p>
+                  <div className={css['card__data']}>
+                    <BiMap color='#55c57a' style={{ height: "32px", width: "32px" }} />
+                    <span>{add}</span>
+                  </div>
+                  <div className={css['card__data']}>
+                    <BsPerson color='#55c57a' style={{ height: "32px", width: "32px" }} />
+                    <span>1000 оюутан</span>
                   </div>
                 </div>
-              </>
+                <div className={css['card__footer']}>
+                  <a
+                    className={`${css['btn']} ${css['btn--green']} ${css['btn--small']} `}
+                    style={{ background: e.color }}
+                    href={e.link ? e.link : "https://ikhzasag.edu.mn/"}
+                    target="_blank"
+                  >
+                    Дэлгэрэнгүй
+                  </a>
+                  <Link
+                    to={{
+                      pathname: '/info',
+                      state: e.name,
+                    }}
+                    className={`${css['btn']} ${css['btn--green']} ${css['btn--small']}`}
+                    style={{
+                      backgroundColor: e.color,
+                    }}
+                  >
+                    Хөтөлбөрүүд
+                  </Link>
+                </div>
+              </div>
             );
           })}
         </div>
