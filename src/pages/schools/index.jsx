@@ -199,10 +199,10 @@ export default function SchoolPage() {
                     Дэлгэрэнгүй
                   </a>
                   <Link
-                    to={{
-                      pathname: '/info',
-                      state: e.name,
-                    }}
+
+                    to="/hutulbur"
+                    state={e.name}
+
                     className={`${css['btn']} ${css['btn--green']} ${css['btn--small']}`}
                     style={{
                       backgroundColor: e.color,

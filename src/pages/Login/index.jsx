@@ -1,23 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Spinner } from 'react-bootstrap';
 
 import GoogleButton from "../../components/GoogleButton";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import validator from "validator";
-// const googleOAuthID = 
+import ElsegchContext from "../../context/ElsegchContext";
+import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [step, setstep] = useState(1);
   const [butDugaar, setBut] = useState('');
   const [error, setError] = useState('');
-  // let history = useHistory();
-  const emailLogin = (provider, data) => {
-    // console.log(data);
-  }
+  const Ectx = useContext(ElsegchContext);
 
-  // const responseGoogle = (response) => {
-  //   Ectx.googleOAuth(response?.tokenId, response?.profileObj, Ectx.state.burtgel_Id);
-  // };
+  const emailLogin = (provider, data) => {
+    Ectx.googleOAuth(provider, data, butDugaar);
+  }
+  if (Ectx.state.email != null && Ectx.state.burtgel_Id != null && Ectx.state.emailVerified) navigate('/elsegch')
+
   const handleBut = (e) => {
     setBut(e.target.value);
   };
@@ -32,7 +33,7 @@ export default function LoginPage() {
     }
     setError(false);
     setstep(2);
-    // Ectx.rememberMe(butDugaar);
+    Ectx.rememberMe(butDugaar);
 
   }
 
@@ -53,11 +54,7 @@ export default function LoginPage() {
         {error && (
           <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>
         )}
-        {/* {Ectx.state.error && (
-                 <p style={{ color: 'red', marginTop: '0.64rem' }}>
-                   {Ectx.state.error}
-                 </p>
-               )} */}
+
       </div>
       <Button onClick={handleLogin} className="fs-5 text-uppercase py-3 px-4 mt-3" style={{ letterSpacing: "1px", background: "#333" }} variant="secondary">
         {/*  */}
@@ -75,23 +72,26 @@ export default function LoginPage() {
         Та өөрийн хувийн и-мэйл хаягаараа нэвтрэн бүртгэлээ
         баталгаажуулна уу
       </p>
-
+      {Ectx.state.error && (
+        <p style={{ color: 'red', marginTop: '1rem' }}>
+          {Ectx.state.error}
+        </p>
+      )}
       {error ? (<p style={{ color: 'red', marginTop: '1rem' }}>Уучлаарай алдаа гарлаа...</p>) : null}
-      < LoginSocialGoogle
+      <LoginSocialGoogle
         client_id={"279980692223-5tbdqf3elphk3p3ncc6tfkqd7q1iefuh.apps.googleusercontent.com"}
         scope="openid"
         discoveryDocs="claims_supported"
         access_type="offline"
         onResolve={({ provider, data }) => emailLogin(provider, data)}
-        onReject={(err) => {
-          setError(err)
-          console.log(err)
-        }}
-      >
-        <GoogleButton />
+        onReject={(err) => setError(err)} >
+        {Ectx.state.loading ? (
+          <Spinner animation="border" variant="info" />
+        ) : <GoogleButton />}
       </LoginSocialGoogle>
     </div >
   )
+
 
 
   return (
@@ -100,9 +100,6 @@ export default function LoginPage() {
         <Card.Body className="container p-5" >
           {step === 1 && butLogin()}
           {step === 2 && googleLogin()}
-
-
-
         </Card.Body>
       </Card>
     </div>

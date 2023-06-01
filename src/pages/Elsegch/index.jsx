@@ -1,33 +1,37 @@
 
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import validator from 'validator';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import './style.css';
-import axios from 'axios';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import axios from './../../axios';
+import { Container, Row, Col, Card, Form, Button, Spinner } from 'react-bootstrap';
 import AimagSelect from '../../components/AimagSelect';
+import useAimags from '../../hooks/useAimags';
+import ElsegchContext from '../../context/ElsegchContext';
+import { BsTrashFill } from 'react-icons/bs';
 export default function ElsegchInfoPage() {
-  const [aimags, setAimag] = useState([{ Id: 1, ner: "Архангай" }, { Id: 2, ner: "Баян-Өлгий" }, { Id: 3, ner: "Баянхонгор" },
-  { Id: 4, ner: "Булган" },
-  { Id: 5, ner: "Говь-Алтай" },
-  { Id: 6, ner: "Говьсүмбэр" },
-  { Id: 7, ner: "Дархан-Уул" }, { Id: 8, ner: "Дорноговь" }, { Id: 9, ner: "Дорнод" }, { Id: 10, ner: "Дундговь" }
-    , { Id: 11, ner: "Завхан" }, { Id: 12, ner: "Орхон" }, { Id: 13, ner: "Сэлэнгэ" }
-    , { Id: 14, ner: "Сүхбаатар" }
-    , { Id: 15, ner: "Төв" }, { Id: 16, ner: "Увс" }
-    , { Id: 22, ner: "Улаанбаатар" }, { Id: 17, ner: "Ховд" }, { Id: 18, ner: "Хэнтий" }, { Id: 19, ner: "Хөвсгөл" },
-  { Id: 20, ner: "Өвөрхангай" }, { Id: 21, ner: "Өмнөговь" }])
-
-
-  const [mergejils, setMergejils] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const Ectx = useContext(ElsegchContext);
 
   const [rd, setRd] = useState('');
   const [fName, setFname] = useState('');
   const [lName, setLname] = useState('');
   const [utas, setUtas] = useState('');
   const [aimag_id, setAimagID] = useState('');
+  const [aimags] = useAimags();
+  const [mergejils, setMergejils] = useState([])
+  useEffect(() => {
+    const getMergejil = async () => {
+      axios.get(`/elsegch/${Ectx.state.burtgel_Id}/mergejil`)
+        .then(result => {
+          setMergejils([...result.data.data])
+        }).catch(err =>
+          toast.error("Уучлаарай алдаа гарлаа. Та дахин туршаад үзээрэй.")
+        );
+    }
+    getMergejil();
+  }, [Ectx.state])
+
   const [error, setError] = useState({
     ovog: null,
     ner: null,
@@ -35,18 +39,6 @@ export default function ElsegchInfoPage() {
     utas: null,
     main: "",
   });
-  const mergejil = []
-  useEffect(() => {
-    const getAimag = async () => {
-      const response = await axios.get('http://localhost:1234/api/v1/aimag');
-
-      console.log(response.data);
-      setAimag(response.data.data);
-    };
-    // getAimag();
-
-  }, [])
-  const notify = () => toast("Wow so easy!");
 
   const handleOvog = (e) => {
     if (validator.isInt(e.target.value)) {
@@ -125,7 +117,6 @@ export default function ElsegchInfoPage() {
       return;
     }
     if (!validator.matches(rd, /[А-ЯӨҮ]{2}[0-9]{8}/gm)) {
-      console.log("ajil");
       setError({
         ...error,
         main: 'Регистрийн дугаараа зөв оруулна уу',
@@ -136,34 +127,26 @@ export default function ElsegchInfoPage() {
       ...error,
       main: '',
     });
-    setSaving(true);
     // handle
     Ectx.insertMyInfo(Ectx.state.burtgel_Id, Ectx.state.email, lName, fName, rd, utas, aimag_id);
   };
 
+  const removeItem = (removeItemId) => setMergejils(prev => prev.filter(mergejil => mergejil.mergejilId != removeItemId))
 
   return (
-    <div className='container '>
-
-
-
-
-      {/* {Ectx.state.error && (
-        <div className="alert alert-danger" role="alert">
-          {Ectx.state.error}
-        </div>
-      )} */}
-
-
-
+    <div className='container'>
       <Container fluid >
-
         <Row className="justify-content-center align-items-center">
           <Col lg="8">
             <Card className="my-5 rounded-3  p-3" style={{ maxWidth: '768px' }}>
               <Card.Title as="p" className="lead alert alert-info p2 m-2">
                 Та мэдээллээ үнэн зөв оруулна уу
               </Card.Title>
+              {Ectx.state.error && (
+                <div className="alert alert-danger" role="alert">
+                  {Ectx.state.error}
+                </div>
+              )}
               {error.main && (
                 <div className="lead alert alert-danger" >
                   {error.main}
@@ -175,38 +158,47 @@ export default function ElsegchInfoPage() {
                 <Row>
                   <Col md="6">
                     <Form.Label className='lead fs-5' htmlFor='ovog' >Овог</Form.Label>
-                    <Form.Control className="mb-4 p-2 fs-4" label="ovog" id="ovog" type="text" placeholder="Овгоо оруулна уу" onChange={handleOvog}
-                      value={lName} />
+                    {
+                      Ectx.state.lname ? (<Form.Control className="mb-4 p-2 fs-4" label="ovog" id="ovog" type="text" placeholder="Овгоо оруулна уу" value={Ectx.state.lname} disabled />) : (<Form.Control className="mb-4 p-2 fs-4" label="ovog" id="ovog" type="text" placeholder="Овгоо оруулна уу" onChange={handleOvog}
+                        value={lName} />
+                      )
+                    }
+
                     {error.ovog && (
                       <span className="error text-danger fs-5">{error.ovog}</span>
                     )}
                   </Col>
                   <Col md="6" className="mb-4">
                     <Form.Label className='lead fs-5' htmlFor="ner">Нэр</Form.Label>
-                    <Form.Control className="mb-4 p-2 fs-4" label="ner" id="ner" type="text" placeholder="Нэрээ оруулна уу" value={fName}
-                      onChange={handleNer} />
+                    {
+                      Ectx.state.fname ? (<Form.Control className="mb-4 p-2 fs-4" label="ovog" id="ovog" type="text" placeholder="Овгоо оруулна уу" value={Ectx.state.fname} disabled />) : (<Form.Control className="mb-4 p-2 fs-4" label="ner" id="ner" type="text" placeholder="Нэрээ оруулна уу" value={fName}
+                        onChange={handleNer} />
+                      )
+                    }
+
                     {error.ner && (
                       <span className="error text-danger fs-5">{error.ner}</span>
                     )}
                   </Col>
                 </Row>
-
-
                 <Row>
                   <Col md="6">
                     <Form.Label className='lead fs-5' htmlFor="rd" >Регистрийн дугаар</Form.Label>
-                    <Form.Control className="mb-4  p-2 fs-4" label="rd" id="rd" type="text" placeholder="Регистрийн дугаараа оруулна уу" name="rd"
-                      value={rd}
-                      onChange={handleRd} />
+                    {
+                      Ectx.state.rd ? (<Form.Control className="mb-4  p-2 fs-4" label="rd" id="rd" type="text" placeholder="Регистрийн дугаараа оруулна уу" value={Ectx.state.rd} disabled />) : (<Form.Control className="mb-4  p-2 fs-4" label="rd" id="rd" type="text" placeholder="Регистрийн дугаараа оруулна уу" name="rd"
+                        value={rd}
+                        onChange={handleRd} />
+                      )
+                    }
+
                     {error.rd && <span className="error text-danger fs-5">{error.rd}</span>}
                   </Col>
-
-
-
                   <Col md="6" className="mb-4">
                     <Form.Label className='lead fs-5' htmlFor="utas" >Утасны дугаар</Form.Label>
-                    <Form.Control className="mb-4  p-2 fs-4" label="utas" id="utas" type="email" name="utas" placeholder="Утасны дугаараа оруулна уу" value={utas}
-                      onChange={handleUtas} />
+                    {
+                      Ectx.state.utas ? (<Form.Control className="mb-4  p-2 fs-4" label="utas" id="utas" type="text" placeholder="Регистрийн дугаараа оруулна уу" value={Ectx.state.utas} disabled />) : (<Form.Control className="mb-4  p-2 fs-4" label="utas" id="utas" type="text" name="utas" placeholder="Утасны дугаараа оруулна уу" value={utas}
+                        onChange={handleUtas} />)
+                    }
                     {error.utas && (
                       <span className="error text-danger fs-5">{error.utas}</span>
                     )}
@@ -215,62 +207,62 @@ export default function ElsegchInfoPage() {
                 <Row>
                   <Col md="6">
                     <Form.Label className='lead fs-5' htmlFor="but" >БҮТ дугаар</Form.Label>
-                    <Form.Control className="mb-4  p-2 fs-4" label="but" id="but" type="text" name="rd"
-                      value={"123123"} disabled />
+                    <Form.Control className="mb-4  p-2 fs-4" label="but" id="but" type="text" name="but"
+                      value={Ectx.state.burtgel_Id ? Ectx.state.burtgel_Id : ""} disabled />
                   </Col>
-
-
                   <Col md="6" className="mb-4">
                     <Form.Label className='lead fs-5 ' htmlFor="email" >И-мэйл</Form.Label>
-                    <Form.Control className="mb-4 p-2 fs-4" label="rd" id="rd" type="email" name="email" value={"jakleito@gmail.com"} disabled />
+                    <Form.Control className="mb-4 p-2 fs-4" label="email" id="email" type="email" name="email" value={Ectx.state.email ? Ectx.state.email : ""} disabled />
                   </Col>
                 </Row>
-
-
                 <Row>
                   <Col md="6">
-                    <AimagSelect aimags={aimags} aimag_id={aimag_id} setAimagID={setAimagID} />
+                    {
+                      Ectx.state.aimag_id ? (<AimagSelect aimags={aimags} aimag_id={Ectx.state.aimag_id} disabled />) : (<AimagSelect aimags={aimags} aimag_id={aimag_id} setAimagID={setAimagID} />)
+                    }
+
                   </Col>
                   {/* <Col md="6" >
                     <Form.Label className='lead fs-5 ' htmlFor="email" >И-мэйл</Form.Label>
                     <Form.Control className="mb-4 p-2 fs-4" label="rd" id="rd" type="email" name="email" value={"jakleito@gmail.com"} disabled />
                   </Col> */}
                 </Row>
-
-                <Button variant="success" className="mb-4" size="lg" onClick={handleBurtgel}>
+                {Ectx.state.loading ? <Spinner animation="border" variant="success" /> : <Button variant="success" className="mb-4" size="lg" onClick={handleBurtgel}>
                   Хадгалах
-                </Button>
+                </Button>}
+
               </Card.Body>
             </Card>
           </Col>
         </Row>
+
+        {
+          mergejils.length > 0 && (
+            <div className='container-sm' style={{ maxWidth: "700px" }}>
+              <Card className="mb-5 text-light  " >
+                <Card.Body>
+                  <p className='lead alert alert-info p-4 fs-4'> Таны сонгосон мэргэжлүүд</p>
+                </Card.Body>
+              </Card>
+            </div>
+          )
+        }
       </Container>
       {
-        mergejils.length > 0 && (
-          <Card style={{ backgroundColor: '#444' }} className="mb-5 text-light">
-            <Card.Body>
-              <p className='lead alert alert-info p-4 fs-4'> Таны сонгосон мэргэжлүүд</p>
+        mergejils &&
+        mergejils.map(mergejil =>
+          <Card key={mergejil.mergejilId} className="mb-5 container-sm" style={{ maxWidth: "700px" }}>
+            <Card.Body className='d-flex align-items-center justify-content-between'>
+              <p className='lead fs-4 pt-2'>
+                {mergejil.Mergejil.name}
+              </p>
+              <button type="submit" className="btn btn-danger" onClick={() => { Ectx.removeMergejil(Ectx.state.burtgel_Id, mergejil.mergejilId, removeItem) }}>
+                <BsTrashFill />
+              </button>
             </Card.Body>
           </Card>
-        )
-      }
 
-      {
-        mergejils &&
-        mergejils.map(mergejil => {
-          return (
-            <Card key={mergejil.mergejilId} style={{ backgroundColor: '#444' }} className="mb-5 text-light">
-              <Card.Body className='d-flex align-items-center justify-content-between'>
-                <p className='lead fs-4 pt-2'>
-                  {mergejil.Mergejil.name}
-                </p>
-                <button type="submit" className="btn btn-danger" onClick={() => { Ectx.removeMergejil(mergejil.elsegchId, mergejil.mergejilId) }}>
-                  <BsTrashFill />
-                </button>
-              </Card.Body>
-            </Card>
-          );
-        })
+        )
       }
     </div >
   )

@@ -1,12 +1,15 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
 import Logo from './../../assets/logowhite.png'
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import "./style.css"
+import ElsegchContext from "../../context/ElsegchContext";
 export default function MainNavbar() {
   const [expanded, setExpanded] = useState(false);
+  const Ectx = useContext(ElsegchContext);
+
   return (
     <Navbar
       collapseOnSelect
@@ -58,12 +61,11 @@ export default function MainNavbar() {
               Тусламж
             </Link>
           </Nav>
-          {/* Ectx.state.burtgel_Id && Ectx.state.email && Ectx.state.emailVerified */}
-          {(1 > 2) ? (
+          {(Ectx.state.burtgel_Id && Ectx.state.email && Ectx.state.emailVerified) ? (
             <Nav className="align-items-center">
               <Link
                 className="fs-4  p-3 mainbtn text-center navlink"
-                to="/my-info"
+                to="/elsegch"
                 onClick={() => setExpanded(false)}
               >
                 Хувийн мэдээлэл
