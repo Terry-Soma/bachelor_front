@@ -38,7 +38,7 @@ export default function MainNavbar() {
           <Nav className="me-auto align-items-center">
             <Link
               className="nav-link p-3 fs-4 mx-4 navlink"
-              to="/info"
+              to="/hutulbur"
               onClick={() => setExpanded(false)}
             >
               Хөтөлбөрүүд
