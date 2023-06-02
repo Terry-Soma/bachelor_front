@@ -227,7 +227,7 @@ export default function ElsegchInfoPage() {
                     <Form.Control className="mb-4 p-2 fs-4" label="rd" id="rd" type="email" name="email" value={"jakleito@gmail.com"} disabled />
                   </Col> */}
                 </Row>
-                {Ectx.state.loading ? <Spinner animation="border" variant="success" /> : <Button variant="success" className="mb-4" size="lg" onClick={handleBurtgel}>
+                {Ectx.state.loading ? <Spinner animation="border" variant="success" /> : (Ectx.state.lname && Ectx.state.fname && Ectx.state.email && Ectx.state.rd && Ectx.state.utas) ? (null) : <Button variant="success" className="mb-4" size="lg" onClick={handleBurtgel}>
                   Хадгалах
                 </Button>}
 

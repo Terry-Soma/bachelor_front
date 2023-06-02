@@ -98,7 +98,7 @@ export const ElsegchStore = (props) => {
     });
 
     if (state.email) {
-      if (state.email === profile.email) {
+      if (state.email === data.email) {
         setState({
           ...state,
           emailVerified: true,
@@ -137,6 +137,7 @@ export const ElsegchStore = (props) => {
       localStorage.setItem("email", obj["email"]);
       localStorage.setItem("burtgel_Id", obj["burtgel_Id"]);
       localStorage.setItem("EV", true);
+      rememberMe(obj["burtgel_Id"], true);
     })
       .catch((err) => {
         console.log(err);
