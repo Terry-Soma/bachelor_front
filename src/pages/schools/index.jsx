@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import css from './style.module.css';
 import { BiMap } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
-
+import { baseUrl } from '../../Constants';
 
 export default function SchoolPage() {
   const data =
@@ -158,7 +158,7 @@ export default function SchoolPage() {
                       &nbsp;
                     </div>
                     <img
-                      src={`https://elselt.ikhzasag.edu.mn/uploads/${e.img}`}
+                      src={`${baseUrl}/uploads/${e.img}`}
                       alt={e.name}
                       className={css['card__picture-img']}
                     />

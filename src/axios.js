@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { api } from './Constants'
 const instance = axios.create({
-  baseURL: 'https://elselt-ikhzasag.onrender.com/api/v1',
+  baseURL: api
 });
 // const instance = axios.create({
 //   baseURL: 'http://localhost:1234/api/v1',
