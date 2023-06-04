@@ -6,7 +6,7 @@ import GoogleButton from "../../components/GoogleButton";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import validator from "validator";
 import ElsegchContext from "../../context/ElsegchContext";
-import { useNavigate } from "react-router-dom";
+import { unstable_HistoryRouter, useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const navigate = useNavigate();
   const [step, setstep] = useState(1);
@@ -17,7 +17,7 @@ export default function LoginPage() {
   const emailLogin = (provider, data) => {
     Ectx.googleOAuth(provider, data, butDugaar);
   }
-  if (Ectx.state.email != null && Ectx.state.burtgel_Id != null && Ectx.state.emailVerified) navigate('/elsegch')
+
 
   const handleBut = (e) => {
     setBut(e.target.value);
@@ -100,6 +100,7 @@ export default function LoginPage() {
         <Card.Body className="container p-5" >
           {step === 1 && butLogin()}
           {step === 2 && googleLogin()}
+          {(Ectx.state.email != null && Ectx.state.burtgel_Id != null && Ectx.state.emailVerified) && navigate('/elsegch')}
         </Card.Body>
       </Card>
     </div>

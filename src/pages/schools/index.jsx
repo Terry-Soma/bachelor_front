@@ -7,6 +7,8 @@ import css from './style.module.css';
 import { BiMap } from 'react-icons/bi'
 import { BsPerson } from 'react-icons/bs'
 import { baseUrl } from '../../Constants';
+import useSchools from '../../hooks/useSchools';
+import { Spinner } from 'react-bootstrap';
 
 export default function SchoolPage() {
   const data =
@@ -132,8 +134,16 @@ export default function SchoolPage() {
         "updatedAt": "2022-03-20T12:37:10.000Z"
       }
     ]
+  const [schools, loading, error] = useSchools();
 
-
+  if (error) {
+    <div className="alert alert-danger" role="alert">
+      {error}
+    </div>
+  }
+  if (loading) {
+    <Spinner animation="border" variant="info" />
+  }
   return (
     <div className="container text-secondary py-5">
       <section id={css.school}>

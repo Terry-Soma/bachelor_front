@@ -9,7 +9,7 @@ const initialState = {
   lname: null,
   rd: null,
   utas: null,
-  error: "nulaal",
+  error: null,
   loading: false,
   saving: false,
   too: 5,

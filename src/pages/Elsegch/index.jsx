@@ -171,7 +171,7 @@ export default function ElsegchInfoPage() {
                   <Col md="6" className="mb-4">
                     <Form.Label className='lead fs-5' htmlFor="ner">Нэр</Form.Label>
                     {
-                      Ectx.state.fname ? (<Form.Control className="mb-4 p-2 fs-4" label="ovog" id="ovog" type="text" placeholder="Овгоо оруулна уу" value={Ectx.state.fname} disabled />) : (<Form.Control className="mb-4 p-2 fs-4" label="ner" id="ner" type="text" placeholder="Нэрээ оруулна уу" value={fName}
+                      Ectx.state.fname ? (<Form.Control className="mb-4 p-2 fs-4" label="ner" id="ner" type="text" placeholder="Овгоо оруулна уу" value={Ectx.state.fname} disabled />) : (<Form.Control className="mb-4 p-2 fs-4" label="ner" id="ner" type="text" placeholder="Нэрээ оруулна уу" value={fName}
                         onChange={handleNer} />
                       )
                     }
