@@ -15,6 +15,7 @@ const initialState = {
   too: 5,
   emailVerified: false,
   mergejils: [],
+  informationApproved : false,
   aimag_id: null,
 };
 

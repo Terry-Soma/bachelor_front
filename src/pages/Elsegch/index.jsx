@@ -4,12 +4,12 @@ import { useState, useEffect, useContext } from 'react';
 import validator from 'validator';
 import { toast } from 'react-toastify';
 import './style.css';
-import axios from './../../axios';
 import { Container, Row, Col, Card, Form, Button, Spinner } from 'react-bootstrap';
 import AimagSelect from '../../components/AimagSelect';
 import useAimags from '../../hooks/useAimags';
 import ElsegchContext from '../../context/ElsegchContext';
 import { BsTrashFill } from 'react-icons/bs';
+import axios from './../../axios'
 export default function ElsegchInfoPage() {
   const Ectx = useContext(ElsegchContext);
 
@@ -131,6 +131,21 @@ export default function ElsegchInfoPage() {
     Ectx.insertMyInfo(Ectx.state.burtgel_Id, Ectx.state.email, lName, fName, rd, utas, aimag_id);
   };
 
+  const approveInformation= ()=>{
+    const mer = mergejils.map(el=>el.mergejilId);
+
+    axios.put(`/elsegch/${Ectx.state.burtgel_Id}`,{
+      mer
+    }).then(result=>{
+
+      console.log(result)
+      // approvedInfo true
+    }).catch(err=>{
+      console.log(err);
+    })
+
+
+  }
   const removeItem = (removeItemId) => setMergejils(prev => prev.filter(mergejil => mergejil.mergejilId != removeItemId))
 
   return (
@@ -241,7 +256,13 @@ export default function ElsegchInfoPage() {
             <div className='container-sm' style={{ maxWidth: "700px" }}>
               <Card className="mb-5 text-light  " >
                 <Card.Body>
-                  <p className='lead alert alert-info p-4 fs-4'> Таны сонгосон мэргэжлүүд</p>
+                  <div className='lead alert alert-info p-4 fs-4 d-flex justify-content-between  align-items-center'>
+
+                  <p className='m-0' > Таны сонгосон мэргэжлүүд</p>
+                  <Button variant="success" size="lg" onClick={approveInformation}>
+                  Баталгаажуулах
+                </Button>
+                  </div>
                 </Card.Body>
               </Card>
             </div>

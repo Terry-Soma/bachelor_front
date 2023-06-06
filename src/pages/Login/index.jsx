@@ -15,6 +15,7 @@ export default function LoginPage() {
   const Ectx = useContext(ElsegchContext);
 
   const emailLogin = (provider, data) => {
+    console.log(provider,data)
     Ectx.googleOAuth(provider, data, butDugaar);
   }
 
@@ -80,7 +81,7 @@ export default function LoginPage() {
       {error ? (<p style={{ color: 'red', marginTop: '1rem' }}>Уучлаарай алдаа гарлаа...</p>) : null}
       <LoginSocialGoogle
         client_id={"279980692223-5tbdqf3elphk3p3ncc6tfkqd7q1iefuh.apps.googleusercontent.com"}
-        scope="openid"
+        scope="openid profile email"
         discoveryDocs="claims_supported"
         access_type="offline"
         onResolve={({ provider, data }) => emailLogin(provider, data)}
