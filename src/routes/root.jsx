@@ -33,7 +33,6 @@ export default function Root() {
         draggable
         pauseOnHover
       />
-      <ToastContainer />
       <Routes>
         <Route path='/school' element={<SchoolPage />} />
         <Route path='/hutulbur' element={<HutulburPage />} />
@@ -46,6 +45,8 @@ export default function Root() {
 
         <Route path='/' element={<HomePage />} />
       </Routes>
+      
+      <ToastContainer />  
     </MainLayout>
   )
 

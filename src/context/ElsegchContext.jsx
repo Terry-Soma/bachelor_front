@@ -15,13 +15,14 @@ const initialState = {
   too: 5,
   emailVerified: false,
   mergejils: [],
-  informationApproved : false,
+  approved : false,
   aimag_id: null,
 };
 
 export const ElsegchStore = (props) => {
   const [state, setState] = useState(initialState);
 
+  const approveInfo = ()=> setState({...state, approved : true})
   const rememberMe = (butDugaar, EV = false) => {
     setState({ ...state, loading: true });
     if (EV) {
@@ -292,7 +293,7 @@ export const ElsegchStore = (props) => {
   }
   return (
     <ElsegchContext.Provider
-      value={{ state, rememberMe, googleOAuth, insertMyInfo, choose, logout, autoLogin, removeMergejil }} >
+      value={{ state, rememberMe, googleOAuth, insertMyInfo, choose, logout, autoLogin, removeMergejil ,approveInfo}} >
       {props.children}
     </ElsegchContext.Provider>
   );

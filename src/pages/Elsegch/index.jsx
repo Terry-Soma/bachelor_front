@@ -135,16 +135,13 @@ export default function ElsegchInfoPage() {
     const mer = mergejils.map(el=>el.mergejilId);
 
     axios.put(`/elsegch/${Ectx.state.burtgel_Id}`,{
-      mer
+      mergejils: mer,
+      butDugaar: Ectx.state.burtgel_Id
     }).then(result=>{
-
-      console.log(result)
-      // approvedInfo true
+      if(result.data)
+      Ectx.approveInfo();
     }).catch(err=>{
-      console.log(err);
     })
-
-
   }
   const removeItem = (removeItemId) => setMergejils(prev => prev.filter(mergejil => mergejil.mergejilId != removeItemId))
 
@@ -157,11 +154,7 @@ export default function ElsegchInfoPage() {
               <Card.Title as="p" className="lead alert alert-info p2 m-2">
                 Та мэдээллээ үнэн зөв оруулна уу
               </Card.Title>
-              {Ectx.state.error && (
-                <div className="alert alert-danger" role="alert">
-                  {Ectx.state.error}
-                </div>
-              )}
+             
               {error.main && (
                 <div className="lead alert alert-danger" >
                   {error.main}
@@ -259,9 +252,12 @@ export default function ElsegchInfoPage() {
                   <div className='lead alert alert-info p-4 fs-4 d-flex justify-content-between  align-items-center'>
 
                   <p className='m-0' > Таны сонгосон мэргэжлүүд</p>
-                  <Button variant="success" size="lg" onClick={approveInformation}>
-                  Баталгаажуулах
-                </Button>
+                  {
+                    Ectx.state.approved === true ? null :  (<Button variant="success" size="lg" onClick={approveInformation}>
+                    Баталгаажуулах
+                  </Button>)
+                  }
+                 
                   </div>
                 </Card.Body>
               </Card>
@@ -277,9 +273,12 @@ export default function ElsegchInfoPage() {
               <p className='lead fs-4 pt-2'>
                 {mergejil.Mergejil.name}
               </p>
-              <button type="submit" className="btn btn-danger" onClick={() => { Ectx.removeMergejil(Ectx.state.burtgel_Id, mergejil.mergejilId, removeItem) }}>
-                <BsTrashFill />
-              </button>
+              {
+                    Ectx.state.approved === true ? null :  (<button type="submit" className="btn btn-danger" onClick={() => { Ectx.removeMergejil(Ectx.state.burtgel_Id, mergejil.mergejilId, removeItem) }}>
+                    <BsTrashFill />
+                  </button>)
+                  }
+              
             </Card.Body>
           </Card>
 
