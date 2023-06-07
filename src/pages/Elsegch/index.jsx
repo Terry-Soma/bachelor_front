@@ -26,7 +26,7 @@ export default function ElsegchInfoPage() {
         .then(result => {
           setMergejils([...result.data.data])
         }).catch(err =>
-          toast.error("Уучлаарай алдаа гарлаа. Та дахин туршаад үзээрэй.")
+          toast.error("Уучлаарай алдаа гарлаа. Та түр хүлээнэ үү.")
         );
     }
     getMergejil();
@@ -131,16 +131,18 @@ export default function ElsegchInfoPage() {
     Ectx.insertMyInfo(Ectx.state.burtgel_Id, Ectx.state.email, lName, fName, rd, utas, aimag_id);
   };
 
-  const approveInformation= ()=>{
-    const mer = mergejils.map(el=>el.mergejilId);
+  const approveInformation = () => {
+    const mer = mergejils.map(el => el.mergejilId);
 
-    axios.put(`/elsegch/${Ectx.state.burtgel_Id}`,{
+    axios.put(`/elsegch/${Ectx.state.burtgel_Id}`, {
       mergejils: mer,
       butDugaar: Ectx.state.burtgel_Id
-    }).then(result=>{
-      if(result.data)
-      Ectx.approveInfo();
-    }).catch(err=>{
+    }).then(result => {
+      if (result.data.message == "success") {
+        Ectx.approveInfo();
+      }
+      Ectx.setError("Алдаа гарлаа. Дахин оролдоно уу");
+    }).catch(err => {
     })
   }
   const removeItem = (removeItemId) => setMergejils(prev => prev.filter(mergejil => mergejil.mergejilId != removeItemId))
@@ -154,7 +156,7 @@ export default function ElsegchInfoPage() {
               <Card.Title as="p" className="lead alert alert-info p2 m-2">
                 Та мэдээллээ үнэн зөв оруулна уу
               </Card.Title>
-             
+
               {error.main && (
                 <div className="lead alert alert-danger" >
                   {error.main}
@@ -243,7 +245,9 @@ export default function ElsegchInfoPage() {
             </Card>
           </Col>
         </Row>
-
+        {
+          Ectx.state.error && (<span className="error text-danger fs-5">{Ectx.state.error}</span>)
+        }
         {
           mergejils.length > 0 && (
             <div className='container-sm' style={{ maxWidth: "700px" }}>
@@ -251,13 +255,13 @@ export default function ElsegchInfoPage() {
                 <Card.Body>
                   <div className='lead alert alert-info p-4 fs-4 d-flex justify-content-between  align-items-center'>
 
-                  <p className='m-0' > Таны сонгосон мэргэжлүүд</p>
-                  {
-                    Ectx.state.approved === true ? null :  (<Button variant="success" size="lg" onClick={approveInformation}>
-                    Баталгаажуулах
-                  </Button>)
-                  }
-                 
+                    <p className='m-0' > Таны сонгосон мэргэжлүүд</p>
+                    {
+                      Ectx.state.approved === true ? null : (<Button variant="success" size="lg" onClick={approveInformation}>
+                        Баталгаажуулах
+                      </Button>)
+                    }
+
                   </div>
                 </Card.Body>
               </Card>
@@ -274,11 +278,11 @@ export default function ElsegchInfoPage() {
                 {mergejil.Mergejil.name}
               </p>
               {
-                    Ectx.state.approved === true ? null :  (<button type="submit" className="btn btn-danger" onClick={() => { Ectx.removeMergejil(Ectx.state.burtgel_Id, mergejil.mergejilId, removeItem) }}>
-                    <BsTrashFill />
-                  </button>)
-                  }
-              
+                Ectx.state.approved === true ? null : (<button type="submit" className="btn btn-danger" onClick={() => { Ectx.removeMergejil(Ectx.state.burtgel_Id, mergejil.mergejilId, removeItem) }}>
+                  <BsTrashFill />
+                </button>)
+              }
+
             </Card.Body>
           </Card>
 

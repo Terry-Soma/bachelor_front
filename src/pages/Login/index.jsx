@@ -15,7 +15,7 @@ export default function LoginPage() {
   const Ectx = useContext(ElsegchContext);
 
   const emailLogin = (provider, data) => {
-    console.log(provider,data)
+    console.log(provider, data)
     Ectx.googleOAuth(provider, data, butDugaar);
   }
 
